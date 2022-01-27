@@ -1,0 +1,35 @@
+version: '3.7'
+services:
+  app:
+    build:
+      context: .
+      target: DJANGO_APP
+    volumes:
+      - .:/app
+    ports:
+      - '8000:8000'
+    environment:
+      - DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 [::1]
+    depends_on:
+      - db
+    links:
+      - db
+    networks:
+      - shared-net
+
+  db:
+    image: "postgres"
+    container_name: postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=123456
+    volumes:
+      - /opt/data/postgres/:/var/lib/postgresql/data/
+    ports:
+      - '5432:5432'
+    networks:
+      - shared-net
+  
+networks:
+  shared-net:
+    driver: bridge

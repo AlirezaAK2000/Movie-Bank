@@ -1,0 +1,15 @@
+{
+    "organId": 1,
+    "city": "tabriz",
+    "voteNum": 2,
+    "organVotes": [
+        {
+            "countryId": "asqwdjwqi",
+            "vote": 1,
+            "time": {
+                "submitTime": "09:22:10",
+                "timezone": "UTC"
+            }
+        }
+    ]
+}

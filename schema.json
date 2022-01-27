@@ -1,0 +1,61 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://example.com/product.schema.json",
+    "title": "Election",
+    "description": "A JSON shema for a voting campaign server",
+    "type": "object",
+    "properties": {
+        "organId": {
+            "description": "UID for a voting organ",
+            "type": "integer"
+        },
+        "city": {
+            "description": "The city of an organ where is located in",
+            "type": "string"
+        },
+        "voteNum": {
+            "description": "Number of Votes",
+            "type": "integer",
+            "minimum": 0
+        },
+        "organVotes": {
+            "description": "Votes in an organ",
+            "type": "array",
+            "uniqueItems": true,
+            "maxItems": 200000,
+            "items": {
+                "type": "object",
+                "properties": {
+                    "country": {
+                        "description": "The country identifier of the person who voted",
+                        "type": "string",
+                        "maxLength": 10,
+                        "minLength": 10
+                    },
+                    "vote": {
+                        "description": "The vote",
+                        "type": "integer"
+                    },
+                    "time": {
+                        "description": "Vote time",
+                        "type": "object",
+                        "properties": {
+                            "submitTime": {
+                                "description": "Vote submit time without timezone",
+                                "type": "string",
+                                "format": "time"
+                            },
+                            "timezone": {
+                                "description": "organ timezone",
+                                "type": "string"
+                            }
+                        },
+                        "required":["submitTime","timezone"]
+                    }
+                },
+                "required":["country","vote","time"]
+            }
+        }
+    },
+    "required":["organId","city","voteNum","organVotes"]
+}
